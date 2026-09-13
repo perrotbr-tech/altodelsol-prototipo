@@ -1,0 +1,11 @@
+{
+  "name": "Alto del Sol prototipo",
+  "install": "npm ci",
+  "start": "npm start",
+  "terminals": [
+    { "name": "hotel-server", "command": "npm start" }
+  ],
+  "ports": [
+    { "name": "app", "port": 3000 }
+  ]
+}

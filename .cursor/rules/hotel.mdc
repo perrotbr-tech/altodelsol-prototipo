@@ -1,0 +1,39 @@
+---
+description: Reglas del prototipo Hotel Alto del Sol (Perrot Tech) — huéspedes corporativos + asistente
+alwaysApply: true
+---
+# Contexto
+Prototipo hotel corporativo (Perrot Tech): gestión de huéspedes de empresas por turnos, portal por empresa, asistente WhatsApp para huéspedes y panel del hotel. Tenant único: altodelsol. Deriva de FORKZA AI; mismo engine, misma disciplina.
+
+# Arquitectura (obligatoria)
+- Node 20 + Express + JavaScript plano con módulos ES. Sin TypeScript, sin React, sin bundler, sin CDN externos. Cero pasos de build.
+- /engine: reglas de negocio puras e isomórficas. Prohibido document, window, fetch, fs, localStorage.
+- /engine/agents/*: cada agente exporta `evaluar(contexto, fechaRef) → acciones[]` con el modelo de ACCIÓN único.
+- /server/store/*: StoreJson y StorePostgres implementan la MISMA interfaz; el engine no sabe cuál usa.
+- /channels/*: adaptadores de canal (web, whatsapp). El engine no conoce el canal.
+- Frontend: index.html + app.js + styles.css en la raíz; vistas por hash. Rutas relativas (./). Funciona servido por Express y en GitHub Pages (modo standalone).
+- Multi-tenant: TODA entidad lleva tenantId; TODO query filtra por tenant; existe tests/tenant-isolation.test.js y debe seguir en verde.
+
+# Reglas de negocio
+- El asistente informa y registra; nunca confirma una reserva nueva ni tarifas: eso lo hace recepción o llega por rooming list. Nunca inventa disponibilidad.
+- Una rooming list confirmada crea/actualiza reservas; una fila con habitación ya ocupada esas noches → conflicto listado, no se crea.
+- Sobreventa: si las reservas confirmadas de una sede superan sus habitaciones en una noche → alerta en panel.
+- Extensión de estadía, cambio de habitación, factura, reclamo → `tareaEquipo` con prioridad; nunca respuesta inventada.
+- Datos del huésped identificados por teléfono; un huésped solo ve su propia reserva. Rol empresa solo ve sus huéspedes y su estado de cuenta.
+- Estado de cuenta mensual por empresa = noches ocupadas × tarifa convenio + extras registrados; el número sale del engine, nunca escrito a mano.
+
+# Datos y textos
+- Todo texto visible al usuario vive en /data/i18n o en la config del tenant. Español de Chile por defecto, cercano y breve, máximo 1 emoji por mensaje.
+- Datos demo rotulados como ficticios en la interfaz.
+- Teléfonos en E.164 según país del tenant. Moneda y formato por tenant.
+
+# Interfaz
+- Design tokens por tenant (CSS variables inyectadas); base negro/amarillo de MONKEYS como tenant demo.
+- Móvil primero (375 px), escritorio 1440 px. Sin scroll horizontal. Botones ≥ 44 px. Contraste AA.
+- Todo dato de usuario con textContent. Sin alert/confirm/prompt del navegador.
+
+# Calidad
+- Cada PR: `node --test tests/` en verde, README actualizado, capturas 375 y 1440 px, descripción con decisiones y pendientes. Sin historial de versiones en textos visibles.
+- Time-box: si algo no cabe, se quita y se anota como pendiente. Un flujo que funciona vale más que tres a medias.
+- No agregar funciones no pedidas. Ante ambigüedad menor, la opción más simple; anotarla en el PR.
+- Commits en español, imperativo, cortos. UN PR por spec.
