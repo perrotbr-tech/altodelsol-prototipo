@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Alto del Sol · Huéspedes</title>
+  <link rel="icon" href="./brand/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="banner" id="banner-demo">Datos demostrativos · prototipo</div>
+
+  <header class="topbar" id="header-guest">
+    <div class="brand-mini">
+      <span class="brand-mini-title" id="brand-mini-title">ALTO DEL SOL</span>
+      <span class="brand-mini-sub" id="brand-mini-sub"></span>
+    </div>
+    <nav class="nav">
+      <a href="#asistente" id="nav-asistente" class="nav-link is-active">ASISTENTE</a>
+      <a href="#empresa" id="nav-empresa" class="nav-link">EMPRESA</a>
+      <a href="#panel" id="nav-panel" class="nav-link">PANEL</a>
+      <a href="#automatizaciones" id="nav-auto" class="nav-link">AUTOMATIZACIONES</a>
+    </nav>
+  </header>
+
+  <header class="topbar perrot-bar hidden" id="header-staff">
+    <div class="perrot-brand">
+      <span class="perrot-word">PERROT <span class="perrot-tech">TECH</span></span>
+    </div>
+    <div class="perrot-tenant" id="staff-hotel-name">Hotel Alto del Sol</div>
+  </header>
+
+  <section id="view-missing" class="missing hidden">
+    <h1>Hotel no encontrado</h1>
+    <p>Ese enlace no corresponde a un hotel activo.</p>
+  </section>
+
+  <section id="view-login" class="login hidden">
+    <h1 id="login-title">Acceso del equipo</h1>
+    <form id="login-form">
+      <label>
+        Correo
+        <input id="login-email" type="email" autocomplete="username" required />
+      </label>
+      <label>
+        Clave
+        <input id="login-pass" type="password" autocomplete="current-password" required />
+      </label>
+      <p id="login-error" class="login-error" hidden></p>
+      <button type="submit" id="login-submit">Entrar</button>
+    </form>
+    <div id="login-demo-help" class="login-help hidden">
+      <p>Acceso de demostración</p>
+      <ul id="login-demo-list"></ul>
+    </div>
+  </section>
+
+  <main id="view-asistente" class="layout">
+    <section class="hero" aria-hidden="false">
+      <p class="wordmark" id="hero-wordmark">ALTO DEL SOL</p>
+      <p class="wordmark-sub" id="hero-bajada"></p>
+      <h1 id="hero-claim">HUÉSPEDES DE EMPRESA. TRES SEDES. UN SOLO PUNTO DE CONTROL.</h1>
+      <p class="lead">Portal de convenio, rooming list y atención al huésped en un solo lugar.</p>
+      <div class="shapes" aria-hidden="true">
+        <span class="shape shape-bar"></span>
+        <span class="shape shape-ring"></span>
+        <span class="shape shape-slash"></span>
+        <span class="shape shape-block"></span>
+      </div>
+    </section>
+
+    <section class="chat" id="chat-panel">
+      <header class="chat-header">
+        <div>
+          <strong id="chat-name">ALTO DEL SOL</strong>
+          <span class="chat-sub" id="chat-sub"></span>
+        </div>
+        <div class="chat-status">
+          <span class="dot" aria-hidden="true"></span>
+          Asistente disponible
+        </div>
+        <span class="badge">WhatsApp simulado</span>
+      </header>
+      <div class="chat-log" id="chat-log"></div>
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" maxlength="2000" autocomplete="off" placeholder="Escribe un mensaje" />
+        <button id="chat-send" type="button">Enviar</button>
+      </div>
+    </section>
+  </main>
+
+  <section id="view-empresa" class="dashboard hidden">
+    <h1 id="emp-title">PORTAL DE EMPRESA</h1>
+    <p class="note-foot" id="emp-sub"></p>
+    <div class="tables" id="emp-turno"></div>
+    <div class="tables" id="emp-rooming"></div>
+    <div class="csv-box">
+      <h3>Cargar lista (CSV)</h3>
+      <p class="note-foot">Columnas: nombre, rut, telefono, checkIn, checkOut, habitacionSolicitada</p>
+      <input id="csv-file" type="file" accept=".csv,text/csv" />
+      <pre id="csv-report" class="csv-report" hidden></pre>
+      <div class="row-actions">
+        <button type="button" id="btn-enviar-lista">Enviar al hotel</button>
+      </div>
+    </div>
+    <div id="emp-conflictos"></div>
+    <div class="tables" id="emp-cuenta"></div>
+    <p class="note-foot">Estado de cuenta informativo · la factura la emite el hotel</p>
+    <button type="button" id="btn-csv-cuenta">Descargar CSV</button>
+  </section>
+
+  <section id="view-panel" class="dashboard hidden">
+    <h1 id="dash-title">PANEL DEL HOTEL</h1>
+    <p class="note-foot">Datos demostrativos · prototipo. Costanera 48 habitaciones (dato publicado). Angamos 30 y Mejillones 24 son cantidades demostrativas.</p>
+    <div id="dash-alertas"></div>
+    <div class="cards" id="dash-cards"></div>
+    <div class="filters" id="dash-filters"></div>
+    <div class="tables" id="dash-mov"></div>
+    <div class="tables" id="dash-rooming"></div>
+    <div class="tables" id="dash-tareas"></div>
+    <h3>Mapa de habitaciones</h3>
+    <div class="filters" id="map-filters"></div>
+    <div class="room-grid" id="room-grid"></div>
+    <div class="reset-box">
+      <button type="button" id="btn-reset">Restaurar demo</button>
+      <div id="reset-confirm" class="hidden reset-confirm">
+        <p>¿Restaurar los datos originales de la demo?</p>
+        <button type="button" id="btn-reset-yes">Confirmar</button>
+        <button type="button" id="btn-reset-no" class="ghost">Cancelar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-auto" class="dashboard hidden">
+    <h1 id="auto-title">AUTOMATIZACIONES</h1>
+    <p class="note-foot">Modo solo mostrar: no envía mensajes reales.</p>
+    <div class="agent-cards" id="auto-cards"></div>
+    <div class="auto-actions-bar">
+      <button type="button" id="btn-run-cycle">Ejecutar ciclo</button>
+    </div>
+    <div class="filters" id="auto-filters"></div>
+    <div class="table-wrap">
+      <h3>ACCIONES</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Agente</th>
+            <th>Destinatario</th>
+            <th>Sede</th>
+            <th>Tipo</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="auto-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside id="msg-panel" class="msg-panel hidden" aria-label="Mensaje">
+    <button type="button" id="msg-close" class="ghost">Cerrar</button>
+    <h2>Mensaje</h2>
+    <p id="msg-meta"></p>
+    <p id="msg-body"></p>
+  </aside>
+
+  <footer class="foot">
+    <p id="foot-sello">Prototipo · Perrot Tech</p>
+  </footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
