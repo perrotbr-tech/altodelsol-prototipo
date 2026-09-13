@@ -251,7 +251,7 @@ button, #chat-send, #btn-reset, #btn-reset-yes, #btn-reset-no, #login-submit,
 .card .lbl { color: var(--color-texto-muted); font-size: 12px; letter-spacing: 0.06em; margin-top: 6px; }
 .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
 .table-wrap { overflow-x: auto; margin-bottom: 18px; }
-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+table { width: 100%; border-collapse: collapse; min-width: 0; }
 th, td {
   text-align: left;
   padding: 10px 8px;
@@ -387,17 +387,23 @@ h3 { letter-spacing: 0.08em; font-size: 14px; }
 .room-cell.llegada { background: var(--hab-llegada); color: var(--color-on-acento); }
 .room-cell.salida { background: var(--hab-salida); color: var(--color-on-acento); }
 
+.banner { position: sticky; top: 0; z-index: 6; }
+.topbar { position: sticky; z-index: 5; }
+
 @media (max-width: 768px) {
-  .layout { grid-template-columns: 1fr; min-height: calc(100vh - 110px); }
+  .layout { grid-template-columns: 1fr; min-height: calc(100dvh - 148px); }
   .hero { display: none; }
   .chat {
     border-left: 0;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100dvh - 148px);
+    max-height: calc(100dvh - 148px);
     width: 100%;
   }
   .cards { grid-template-columns: 1fr 1fr; }
   .brand-mini-sub { display: none; }
-  .topbar { flex-wrap: wrap; }
+  .topbar { flex-wrap: wrap; top: 28px; }
   .nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
   .nav-link { padding: 10px 10px; font-size: 12px; }
+  th, td { font-size: 12px; padding: 8px 6px; }
+  .dashboard { padding: 16px 12px 48px; }
 }

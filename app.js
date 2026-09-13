@@ -286,6 +286,15 @@ function route() {
   navP.classList.toggle('is-active', dash);
   navE.classList.toggle('is-active', emp);
   navAuto.classList.toggle('is-active', auto);
+  document.querySelectorAll('.nav-link').forEach((a) => {
+    const h = (a.getAttribute('href') || '').replace('#', '');
+    if (a.id) return;
+    a.classList.toggle('is-active',
+      (h === 'asistente' && !dash && !auto && !emp && !login)
+      || (h === 'panel' && dash)
+      || (h === 'empresa' && emp)
+      || (h === 'automatizaciones' && auto));
+  });
   if (login) showLogin();
   if (dash) renderPanel();
   if (emp) renderEmpresa();
